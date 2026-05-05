@@ -8,17 +8,13 @@ import { MAX_WORD_LENGTH } from "~/utils/constants"
 const MAX_ATTEMPTS   = 6
 const REVEAL_DELAY   = MAX_WORD_LENGTH * 250 + 500
 
-type GameBoardProps = {
-    targetWord: string
-    onNewGame: () => void
-}
-
-export const GameBoard = ({ targetWord, onNewGame }: GameBoardProps) => {
+export const GameBoard = () => {
     const [guesses, setGuesses]         = useState<string[]>([])
     const [allStatuses, setAllStatuses] = useState<LetterStatus[][]>([])
     const [currentGuess, setCurrentGuess] = useState("")
     const [gameOver, setGameOver]       = useState(false)
     const [won, setWon]                 = useState(false)
+    const [targetWord, setTargetWord] = useState(GameBoardUtil.getRandomWord())
     const [error, setError]             = useState<string | null>(null)
     const [shakingRow, setShakingRow]   = useState<number | null>(null)
     const [revealingRow, setRevealingRow] = useState<number | null>(null)
@@ -28,6 +24,18 @@ export const GameBoard = ({ targetWord, onNewGame }: GameBoardProps) => {
         const t = setTimeout(() => setError(null), 1500)
         return () => clearTimeout(t)
     }, [error])
+
+    const handleNewGame = useCallback(() => {
+        setGuesses([])
+        setAllStatuses([])
+        setCurrentGuess("")
+        setGameOver(false)
+        setWon(false)
+        setTargetWord(GameBoardUtil.getRandomWord())
+        setError(null)
+        setShakingRow(null)
+        setRevealingRow(null)
+    }, [])
 
     const handleKey = useCallback((key: string) => {
         if (gameOver) return
@@ -150,7 +158,7 @@ export const GameBoard = ({ targetWord, onNewGame }: GameBoardProps) => {
                     )}
                     <button
                         onMouseDown={e => e.preventDefault()}
-                        onClick={onNewGame}
+                        onClick={handleNewGame}
                         style={{
                             marginTop:   '16px',
                             padding:     '12px 32px',

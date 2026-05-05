@@ -8,4 +8,5 @@ export interface IGameBoard  {
     targetLetters: string[]
     compareWord: (guess: string, target: string) => LetterStatus[]
     checkWord: (input: string) => { success: boolean; error?: string }
+    getRandomWord: () => string
 }

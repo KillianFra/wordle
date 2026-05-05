@@ -36,5 +36,8 @@ export const GameBoard: IGameBoard = {
             return { success: false, error: WORD_NOT_IN_LIST };
         }
         return { success: true };
+    },
+    getRandomWord: (): string => {
+        return WORDS_LIST[Math.floor(Math.random() * WORDS_LIST.length)]
     }
 };
