@@ -67,3 +67,166 @@ body {
 .toast-enter {
   animation: toast-in 0.15s ease forwards;
 }
+
+/* ─── Win animation ──────────────────────────────────────── */
+
+@keyframes overlay-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes punch-a {
+  0%, 100% { transform: rotate(0deg); }
+  50%       { transform: rotate(-45deg); }
+}
+
+@keyframes punch-b {
+  0%, 100% { transform: rotate(0deg); }
+  50%       { transform: rotate(45deg); }
+}
+
+@keyframes body-sway-a {
+  0%, 100% { transform: translateX(0); }
+  50%       { transform: translateX(6px); }
+}
+
+@keyframes body-sway-b {
+  0%, 100% { transform: translateX(0); }
+  50%       { transform: translateX(-6px); }
+}
+
+@keyframes pow-flash {
+  0%, 45%, 100% { opacity: 0; transform: scale(0.7); }
+  22%            { opacity: 1; transform: scale(1.3); }
+}
+
+@keyframes fall-over {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(88deg); }
+}
+
+@keyframes appear {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes victory-a {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-80deg); }
+}
+
+@keyframes winner-move {
+  from { transform: translateX(0); }
+  to   { transform: translateX(150px); }
+}
+
+@keyframes gf-move {
+  0%   { transform: translateX(150px); opacity: 0; }
+  30%  { opacity: 1; }
+  100% { transform: translateX(0);     opacity: 1; }
+}
+
+@keyframes heart-beat {
+  0%, 100% { transform: scale(1);   opacity: 0.8; }
+  50%       { transform: scale(1.5); opacity: 1; }
+}
+
+@keyframes btn-appear {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.win-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.88);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  animation: overlay-in 0.3s ease forwards;
+}
+
+/* Fighter A outer group: slides right starting at 6s */
+.fighter-a-outer {
+  animation: winner-move 2s ease 6s 1 both;
+}
+
+/* Fighter A inner group: body sway during fight (0–4.8s) */
+.fighter-a-inner {
+  animation: body-sway-a 0.4s ease-in-out 12 forwards;
+}
+
+/* Fighter B outer group: falls at 5s (rotate around feet) */
+.fighter-b-outer {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: fall-over 0.8s ease 5s 1 both;
+}
+
+/* Fighter B inner group: body sway during fight */
+.fighter-b-inner {
+  animation: body-sway-b 0.4s ease-in-out 12 forwards;
+}
+
+/* Fighter A right arm outer: victory pose at 5s */
+.punch-arm-a-outer {
+  transform-box: fill-box;
+  transform-origin: 0% 0%;
+  animation: victory-a 0.3s ease 5s 1 both;
+}
+
+/* Fighter A right arm inner: punch during fight */
+.punch-arm-a-inner {
+  transform-box: fill-box;
+  transform-origin: 0% 0%;
+  animation: punch-a 0.4s ease-in-out 12 forwards;
+}
+
+/* Fighter B left arm: punch during fight */
+.punch-arm-b {
+  transform-box: fill-box;
+  transform-origin: 100% 0%;
+  animation: punch-b 0.4s ease-in-out 12 forwards;
+}
+
+.pow-text {
+  animation: pow-flash 0.4s ease-in-out 12 forwards;
+}
+
+/* Cross and winner label appear after death */
+.cross-text {
+  animation: appear 0.4s ease 5.8s 1 both;
+}
+
+.winner-label {
+  animation: appear 0.4s ease 5.1s 1 both;
+}
+
+/* Girlfriend slides in from right starting at 6s */
+.girlfriend-outer {
+  animation: gf-move 2s ease 6s 1 both;
+}
+
+/* Heart pulses between characters starting at 7s */
+.heart-text {
+  animation: heart-beat 0.5s ease-in-out 7s 6 both;
+}
+
+/* New Game button fades in at 8s */
+.win-new-game-btn {
+  margin-top: 24px;
+  padding: 12px 32px;
+  background-color: #538d4e;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Karla', sans-serif;
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  animation: btn-appear 0.5s ease 8s 1 both;
+}
