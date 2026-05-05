@@ -109,7 +109,7 @@ export const WinAnimation = ({ onNewGame }: WinAnimationProps) => {
                     {/* skirt */}
                     <polygon
                         points="287,155 333,155 310,193"
-                        style={{ ...limb }}
+                        style={{ ...limb, fill: "none" as const }}
                     />
                     {/* legs */}
                     <line x1={297} y1={193} x2={283} y2={240} style={limb} />
