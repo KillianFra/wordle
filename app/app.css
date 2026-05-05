@@ -105,7 +105,7 @@ body {
   to   { transform: rotate(88deg); }
 }
 
-@keyframes appear {
+@keyframes win-appear {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
@@ -192,16 +192,18 @@ body {
 }
 
 .pow-text {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
   animation: pow-flash 0.4s ease-in-out 12 forwards;
 }
 
 /* Cross and winner label appear after death */
 .cross-text {
-  animation: appear 0.4s ease 5.8s 1 both;
+  animation: win-appear 0.4s ease 5.8s 1 both;
 }
 
 .winner-label {
-  animation: appear 0.4s ease 5.1s 1 both;
+  animation: win-appear 0.4s ease 5.1s 1 both;
 }
 
 /* Girlfriend slides in from right starting at 6s */
@@ -211,7 +213,7 @@ body {
 
 /* Heart pulses between characters starting at 7s */
 .heart-text {
-  animation: heart-beat 0.5s ease-in-out 7s 6 both;
+  animation: heart-beat 0.5s ease-in-out 7s 6 forwards;
 }
 
 /* New Game button fades in at 8s */
@@ -229,4 +231,12 @@ body {
   text-transform: uppercase;
   cursor: pointer;
   animation: btn-appear 0.5s ease 8s 1 both;
+}
+
+.win-new-game-btn:hover {
+  background-color: #6aaf63;
+}
+.win-new-game-btn:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
 }
