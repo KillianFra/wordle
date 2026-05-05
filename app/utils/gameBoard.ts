@@ -38,6 +38,8 @@ export const GameBoard: IGameBoard = {
         return { success: true };
     },
     getRandomWord: (): string => {
-        return WORDS_LIST[Math.floor(Math.random() * WORDS_LIST.length)]
+        const word = WORDS_LIST[Math.floor(Math.random() * WORDS_LIST.length)]
+        console.log("Selected target word:", word) // For debugging purposes, can be removed in production
+        return word
     }
 };
