@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react"
 import { WordComponent } from "./WordComponent"
 import { KeyboardComponent } from "./KeyboardComponent"
+import { WinAnimation } from "./WinAnimation"
 import { GameBoard as GameBoardUtil } from "~/utils/gameBoard"
 import type { LetterStatus } from "~/types/types"
 import { MAX_WORD_LENGTH } from "~/utils/constants"
@@ -128,34 +129,24 @@ export const GameBoard = () => {
                 ))}
             </div>
 
-            {/* Game-over panel */}
-            {gameOver && (
+            {/* Win animation overlay */}
+            {won && <WinAnimation onNewGame={handleNewGame} />}
+
+            {/* Loss panel */}
+            {!won && gameOver && (
                 <div style={{ marginTop: "8px", textAlign: "center" }}>
-                    {won ? (
-                        <p style={{
-                            margin:      0,
-                            fontFamily:  "'Karla', sans-serif",
-                            fontWeight:  800,
-                            fontSize:    '1.1rem',
-                            color:       '#538d4e',
-                            letterSpacing: '0.04em',
-                        }}>
-                            Magnificent!
-                        </p>
-                    ) : (
-                        <p style={{
-                            margin:     0,
-                            fontFamily: "'Karla', sans-serif",
-                            fontWeight: 700,
-                            fontSize:   '1rem',
-                            color:      '#ffffff',
-                        }}>
-                            The word was{' '}
-                            <span style={{ color: '#b59f3b', fontWeight: 800, textTransform: 'uppercase' }}>
-                                {targetWord}
-                            </span>
-                        </p>
-                    )}
+                    <p style={{
+                        margin:     0,
+                        fontFamily: "'Karla', sans-serif",
+                        fontWeight: 700,
+                        fontSize:   '1rem',
+                        color:      '#ffffff',
+                    }}>
+                        The word was{' '}
+                        <span style={{ color: '#b59f3b', fontWeight: 800, textTransform: 'uppercase' }}>
+                            {targetWord}
+                        </span>
+                    </p>
                     <button
                         onMouseDown={e => e.preventDefault()}
                         onClick={handleNewGame}
