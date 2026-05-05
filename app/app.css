@@ -1,15 +1,69 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans: "Karla", ui-sans-serif, system-ui, sans-serif;
 }
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+  background-color: #121213;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
+@keyframes tile-pop {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes tile-flip {
+  0% {
+    transform: rotateX(0deg);
+    background-color: transparent;
+    border-color: #3a3a3c;
   }
+  48% {
+    transform: rotateX(-85deg);
+    background-color: transparent;
+    border-color: #3a3a3c;
+  }
+  50% {
+    transform: rotateX(-90deg);
+    background-color: var(--reveal-color);
+    border-color: var(--reveal-border);
+  }
+  100% {
+    transform: rotateX(0deg);
+    background-color: var(--reveal-color);
+    border-color: var(--reveal-border);
+  }
+}
+
+@keyframes row-shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.tile-pop {
+  animation: tile-pop 0.1s ease;
+}
+
+.tile-flip {
+  animation: tile-flip 0.5s ease forwards;
+}
+
+.row-shake {
+  animation: row-shake 0.5s ease;
+}
+
+.toast-enter {
+  animation: toast-in 0.15s ease forwards;
 }

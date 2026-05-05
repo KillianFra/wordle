@@ -1,87 +1,42 @@
-# Welcome to React Router!
+# Wordle
 
-A modern, production-ready template for building full-stack React applications using React Router.
+Ce projet se base sur [l'atomic design](https://atomicdesign.bradfrost.com/chapter-2/) pour la définition et la gestion de ses différents composants.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+## Elements fondamentaux Wordle
 
-## Features
+Wordle est un jeu de lettres qui propose de faire deviner un mot (**5 Lettres**) en **6 Essais**, a chaque essai, chaques lettres recoit un status :
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+🟢 La Lettre est a la bonne position.
 
-## Getting Started
+🟨 La Lettre est présente dans le mot, mais ne se trouve pas a la bonne place.
 
-### Installation
+🟥 La Lettre n'est pas présente dans le mot.
 
-Install the dependencies:
+#### Conditions de la parties:
 
-```bash
-npm install
-```
+- [ ] Si Le joueur n'as pas trouvé le mot en 6 essais, la partie s'arrete et le joueur a perdu.
 
-### Development
+- [ ] Si le joueur trouve le mot en moins de 6 essais, la partie s'arrete et le joueur a gagné (affichage de son nombre d'essai)
 
-Start the development server with HMR:
+- [ ] *V2* - Si le joueur rentre un mot qui n'existe pas dans la langue francaise, le mot est refusé et aucun essais n'est compté
 
-```bash
-npm run dev
-```
 
-Your application will be available at `http://localhost:5173`.
+#### Modélisation des comportements
 
-## Building for Production
+- Le joueur soumet un mot : qu'est-ce qui est retourné ?
 
-Create a production build:
+Lorsque le joueur soumet un mot, le jeu va d'abord s'assurer que le mot fait exactement 5 lettres, puis le jeu va comparer les lettres rentré avec le mot a deviner.
+Puis afficher les differents status de chaque lettres.
 
-```bash
-npm run build
-```
+- Le joueur trouve le bon mot : que devient la partie ?
+Le joueur trouve le bon mot, la partie se termine, le joueur ne peut plus rentrer d'input.
+- Le joueur épuise ses 6 tentatives : que se passe-t-il ?
+La partie se termine, le mot a trouver s'affiche en dessous dans une nouvelle ligne, le jeu affiche perdu.
+- Le joueur soumet un mot qui n'existe pas dans le dictionnaire ?
 
-## Deployment
+Lorsque le joueur soumet un mot, Le site doit comparer l'input du joueur avec la liste (locale) de mots, si le mot n'est pas present dans cette liste, le mot est refusé et l'input est clear.
+- Le joueur essaie de jouer alors que la partie est déjà terminée ?
 
-### Docker Deployment
+Les inputs sont désactivés lorsque la partie est terminé. le jpoueur ne peut donc plus jouer
 
-To build and run using Docker:
 
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.
