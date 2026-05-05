@@ -1,10 +1,8 @@
-import React from "react"
-
 interface WinAnimationProps {
     onNewGame: () => void
 }
 
-export const WinAnimation: React.FC<WinAnimationProps> = ({ onNewGame }) => {
+export const WinAnimation = ({ onNewGame }: WinAnimationProps) => {
     const limb = {
         stroke: "#ffffff" as const,
         strokeWidth: 3,
@@ -111,7 +109,7 @@ export const WinAnimation: React.FC<WinAnimationProps> = ({ onNewGame }) => {
                     {/* skirt */}
                     <polygon
                         points="287,155 333,155 310,193"
-                        style={{ fill: "none", stroke: "#ffffff", strokeWidth: 3 }}
+                        style={{ ...limb }}
                     />
                     {/* legs */}
                     <line x1={297} y1={193} x2={283} y2={240} style={limb} />
